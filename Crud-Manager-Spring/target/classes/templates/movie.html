@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crud Manager - Filmes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:replace="navmenu :: header"></div>
+    <div class="container my-4">
+        <h1>Filmes</h1>
+        <a th:href="@{/movies/form}" class="btn btn-primary mb-3">Adicionar Filme</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Duração</th>
+                    <th>Gênero</th>
+                    <th>Classificação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="movie : ${movies}">
+                    <td th:text="${movie.title}"></td>
+                    <td th:text="${movie.duration} + ' minutos'"></td>
+                    <td th:text="${movie.genre}"></td>
+                    <td th:text="${movie.ageRating}"></td>
+                    <td>
+                        <a th:href="@{/movies/update/{id}(id=${movie.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/movies/delete/{id}(id=${movie.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

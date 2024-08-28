@@ -2,78 +2,91 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-            crossorigin="anonymous">
-        <link rel="stylesheet"
-            href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.js"
-                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-                crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-                integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-                crossorigin="anonymous"></script>
-        <title>Crud Manager - Form Usuário</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous"></script>
+    <title>Crud Manager - Form Usuário</title>
+    <style>
+        .centered-form {
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
 
-    <body>
-        <div class="container my-2">
-            <h2>Usuário</h2>
+<body>
+    <div class="container my-5">
+        <div class="centered-form">
+            <h2 class="text-center">Adicionar Usuário</h2>
             <form action="#" th:action="@{/users/register}" method="POST" th:object="${usuario}">
-
                 <input type="hidden" id="id" th:field="*{id}">
-                
-                <span 
-                    class="text-danger"
-                    th:if="${#fields.hasErrors('name')}"
-                    th:errors="*{name}">
-                </span>
-                <input type="text" placeholder="Nome" class="form-control mb-4 col-4" th:field="*{name}"> 
-                
-                <span 
-                    class="text-danger"
-                    th:if="${#fields.hasErrors('email')}"
-                    th:errors="*{email}">
-                </span>
-                <input type="text" placeholder="Email" class="form-control mb-4 col-4" th:field="*{email}">
-                
-                <span 
-                    class="text-danger"
-                    th:if="${#fields.hasErrors('gender')}"
-                    th:errors="*{gender}">
-                </span>
-                <input type="text" placeholder="Gênero" class="form-control mb-4 col-4" th:field="*{gender}">
+
+                <div class="form-group">
+                    <span class="text-danger"
+                          th:if="${#fields.hasErrors('name')}"
+                          th:errors="*{name}">
+                    </span>
+                    <input type="text" placeholder="Nome" class="form-control mb-4" th:field="*{name}">
+                </div>
+
+                <div class="form-group">
+                    <span class="text-danger"
+                          th:if="${#fields.hasErrors('email')}"
+                          th:errors="*{email}">
+                    </span>
+                    <input type="text" placeholder="Email" class="form-control mb-4" th:field="*{email}">
+                </div>
+
+                <div class="form-group">
+                    <span class="text-danger"
+                          th:if="${#fields.hasErrors('gender')}"
+                          th:errors="*{gender}">
+                    </span>
+                    <input type="text" placeholder="Gênero" class="form-control mb-4" th:field="*{gender}">
+                </div>
 
                 <input type="hidden" id="idAddress" name="id" th:field="*{address.id}">
 
-                <span 
-                    class="text-danger"
-                    th:if="${#fields.hasErrors('address.place')}"
-                    th:errors="*{address.place}">
-                </span>
-                <input type="text" placeholder="Logradouro" class="form-control mb-4 col-4" th:field="*{address.place}"> 
+                <div class="form-group">
+                    <span class="text-danger"
+                          th:if="${#fields.hasErrors('address.place')}"
+                          th:errors="*{address.place}">
+                    </span>
+                    <input type="text" placeholder="Logradouro" class="form-control mb-4" th:field="*{address.place}">
+                </div>
 
-                <span 
-                    class="text-danger"
-                    th:if="${#fields.hasErrors('address.number')}"
-                    th:errors="*{address.number}">
-                </span>
-                <input type="number" placeholder="Número" class="form-control mb-4 col-4" th:field="*{address.number}">
+                <div class="form-group">
+                    <span class="text-danger"
+                          th:if="${#fields.hasErrors('address.number')}"
+                          th:errors="*{address.number}">
+                    </span>
+                    <input type="number" placeholder="Número" class="form-control mb-4" th:field="*{address.number}">
+                </div>
 
-                <span 
-                    class="text-danger"
-                    th:if="${#fields.hasErrors('address.zipCode')}"
-                    th:errors="*{address.zipCode}">
-                </span>
-                <input type="text" placeholder="CEP" class="form-control mb-4 col-4" th:field="*{address.zipCode}"> 
-                
-                <button type="submit" class="btn btn-info col-2">Salvar</button>                
+                <div class="form-group">
+                    <span class="text-danger"
+                          th:if="${#fields.hasErrors('address.zipCode')}"
+                          th:errors="*{address.zipCode}">
+                    </span>
+                    <input type="text" placeholder="CEP" class="form-control mb-4" th:field="*{address.zipCode}">
+                </div>
+
+                <button type="submit" class="btn btn-info">Salvar</button>
             </form>
             <hr>
-            <a th:href="@{/users}">Usuários</a>
+            <a class="btn btn-secondary" th:href="@{/users}">Voltar</a>
         </div>
-    </body>
+    </div>
+</body>
 </html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crud Manager - Formulário de Cinema</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:replace="navmenu :: header"></div>
+    <div class="container my-4">
+        <h2 th:text="${cinema.id == null ? 'Adicionar Cinema' : 'Editar Cinema'}"></h2>
+        <form action="#" th:action="@{/cinemas/register}" method="POST" th:object="${cinema}">
+            <input type="hidden" th:field="*{id}">
+            
+            <div class="form-group">
+                <label for="room">Sala</label>
+                <input type="text" id="room" class="form-control" th:field="*{room}" placeholder="Sala do cinema">
+                <span class="text-danger" th:if="${#fields.hasErrors('room')}" th:errors="*{room}"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="cinemaName">Nome do Cinema</label>
+                <input type="text" id="cinemaName" class="form-control" th:field="*{cinemaName}" placeholder="Nome do cinema">
+                <span class="text-danger" th:if="${#fields.hasErrors('cinemaName')}" th:errors="*{cinemaName}"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="price">Preço</label>
+                <input type="number" step="0.01" id="price" class="form-control" th:field="*{price}" placeholder="Preço do ingresso">
+                <span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="showTime">Horário</label>
+                <input type="text" id="showTime" class="form-control" th:field="*{showTime}" placeholder="Horário do filme">
+                <span class="text-danger" th:if="${#fields.hasErrors('showTime')}" th:errors="*{showTime}"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Data</label>
+                <input type="text" id="date" class="form-control" th:field="*{date}" placeholder="Data da exibição">
+                <span class="text-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="movies">Filmes</label>
+                <select multiple="multiple" class="form-control" id="movies" th:field="*{movies}">
+                    <option th:each="movie : ${allMovies}" th:value="${movie.id}" th:text="${movie.title}"></option>
+                </select>
+                <span class="text-danger" th:if="${#fields.hasErrors('movies')}" th:errors="*{movies}"></span>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="#" th:href="@{/cinemas}" class="btn btn-secondary">Voltar</a>
+        </form>
+    </div>
+</body>
+</html>

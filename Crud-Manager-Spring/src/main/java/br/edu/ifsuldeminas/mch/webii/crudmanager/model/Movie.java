@@ -1,9 +1,12 @@
 package br.edu.ifsuldeminas.mch.webii.crudmanager.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -35,4 +38,7 @@ public class Movie {
 
     @NotBlank(message = "Classificação etária é obrigatória!")
     private String ageRating;
+
+    @ManyToMany(mappedBy = "movies")
+    private Set<Cinema> cinemas;
 }

@@ -1,0 +1,27 @@
+<th:block th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #333;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/" style="color: white;">Cinema-Spring</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item mx-3">
+                        <a class="nav-link" th:href="@{/}" style="color: white;">Home</a>
+                    </li>
+                    <li class="nav-item mx-3">
+                        <a class="nav-link" th:href="@{/users}" style="color: white;">Users</a>
+                    </li>
+                    <li class="nav-item mx-3">
+                        <a class="nav-link" th:href="@{/cinemas}" style="color: white;">Cinema</a>
+                    </li>
+                    <li class="nav-item mx-3">
+                        <a class="nav-link" th:href="@{/movies}" style="color: white;">Movies</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+</th:block>
