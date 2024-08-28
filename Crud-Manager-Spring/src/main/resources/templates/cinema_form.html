@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <div th:replace="cabecalho :: head"></div>
     <title>Crud Manager - Formulário de Cinema</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div th:replace="navmenu :: header"></div>
     <div class="container my-4">
         <h2 th:text="${cinema.id == null ? 'Adicionar Cinema' : 'Editar Cinema'}"></h2>
-        <form action="#" th:action="@{/cinemas/register}" method="POST" th:object="${cinema}">
+        <form action="#" th:action="@{/cinemas/save}" method="POST" th:object="${cinema}">
             <input type="hidden" th:field="*{id}">
             
             <div class="form-group">

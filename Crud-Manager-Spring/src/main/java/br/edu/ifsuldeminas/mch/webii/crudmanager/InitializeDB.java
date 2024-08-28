@@ -5,8 +5,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import br.edu.ifsuldeminas.mch.webii.crudmanager.model.Address;
+import br.edu.ifsuldeminas.mch.webii.crudmanager.model.Movie;
 import br.edu.ifsuldeminas.mch.webii.crudmanager.model.User;
 import br.edu.ifsuldeminas.mch.webii.crudmanager.repository.AddressRepository;
+import br.edu.ifsuldeminas.mch.webii.crudmanager.repository.MovieRepository;
 import br.edu.ifsuldeminas.mch.webii.crudmanager.repository.UserRepository;
 import jakarta.transaction.Transactional;
 
@@ -19,6 +21,9 @@ public class InitializeDB implements CommandLineRunner{
 
     @Autowired
     private AddressRepository addressRepo;
+
+    @Autowired
+    private MovieRepository movieRepo;
 
     @Override
     public void run(String... args) throws Exception {
@@ -52,6 +57,14 @@ public class InitializeDB implements CommandLineRunner{
 
         userRepo.save(luiz);
         userRepo.save(gui);
+
+        Movie filme1 = new Movie();
+        filme1.setTitle("titulo teste");
+        filme1.setDuration(210);
+        filme1.setGenre("ação");
+        filme1.setAgeRating("+18");
+        movieRepo.save(filme1);
+
     }
 
 }

@@ -1,18 +1,19 @@
 package br.edu.ifsuldeminas.mch.webii.crudmanager.model;
 
-import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+
+import java.util.Set;
 
 @Entity
 @Data
@@ -44,11 +45,6 @@ public class Cinema {
     @NotBlank(message = "Data é obrigatória!")
     private String date;
 
-    @ManyToMany
-    @JoinTable(
-        name = "cinema_movie",
-        joinColumns = @JoinColumn(name = "cinema_id"),
-        inverseJoinColumns = @JoinColumn(name = "movie_id")
-    )
+    @OneToMany(mappedBy = "cinema", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Movie> movies;
 }

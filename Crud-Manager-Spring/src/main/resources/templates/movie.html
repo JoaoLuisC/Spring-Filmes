@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Crud Manager - Filmes</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <div th:replace="cabecalho :: head"></div>
 </head>
 <body>
     <div th:replace="navmenu :: header"></div>
@@ -27,7 +27,7 @@
                     <td th:text="${movie.genre}"></td>
                     <td th:text="${movie.ageRating}"></td>
                     <td>
-                        <a th:href="@{/movies/update/{id}(id=${movie.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/movies/edit/{id}(id=${movie.id})}" class="btn btn-warning btn-sm">Editar</a>
                         <a th:href="@{/movies/delete/{id}(id=${movie.id})}" class="btn btn-danger btn-sm">Excluir</a>
                     </td>
                 </tr>
