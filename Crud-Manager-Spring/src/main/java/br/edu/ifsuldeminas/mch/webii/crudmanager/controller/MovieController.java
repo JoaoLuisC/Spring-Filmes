@@ -40,8 +40,8 @@ public class MovieController {
         return "redirect:/movies";
     }
 
-    @GetMapping("/update/{id}")  // Alterado para "update" em vez de "edit"
-    public String updateMovie(@PathVariable("id") Integer id, Model model) {  // Nome do método alterado para "updateMovie"
+    @GetMapping("/update/{id}") 
+    public String updateMovie(@PathVariable("id") Integer id, Model model) {  
         Optional<Movie> movieOptional = movieRepo.findById(id);
         Movie movie;
 

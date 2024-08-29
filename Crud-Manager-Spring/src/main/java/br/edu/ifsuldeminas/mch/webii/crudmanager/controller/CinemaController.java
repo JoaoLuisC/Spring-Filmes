@@ -39,7 +39,7 @@ public class CinemaController {
 
     @GetMapping("/form")
     public String showForm(@ModelAttribute("cinema") Cinema cinema, Model model) {
-        List<Movie> allMovies = movieRepo.findAll();  // Para preencher o dropdown com filmes
+        List<Movie> allMovies = movieRepo.findAll();  
         model.addAttribute("allMovies", allMovies);
         return "cinema_form";
     }

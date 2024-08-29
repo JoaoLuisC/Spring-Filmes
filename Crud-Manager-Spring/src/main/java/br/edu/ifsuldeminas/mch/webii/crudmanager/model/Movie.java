@@ -8,8 +8,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "movies")
 public class Movie {
 
@@ -35,43 +37,4 @@ public class Movie {
     @NotBlank(message = "Classificação etária é obrigatória!")
     private String ageRating;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getAgeRating() {
-        return ageRating;
-    }
-
-    public void setAgeRating(String ageRating) {
-        this.ageRating = ageRating;
-    }
 }

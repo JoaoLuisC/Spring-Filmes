@@ -8,6 +8,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "home"; // O nome do arquivo home.html
+        return "home";
     }
 }
