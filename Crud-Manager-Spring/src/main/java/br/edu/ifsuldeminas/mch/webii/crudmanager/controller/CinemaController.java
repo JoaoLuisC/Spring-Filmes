@@ -30,6 +30,8 @@ public class CinemaController {
     @Autowired
     private MovieRepository movieRepo;
 
+    
+
     @GetMapping
     public String listCinemas(Model model) {
         List<Cinema> cinemas = cinemaRepo.findAll();

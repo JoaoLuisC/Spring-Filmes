@@ -1,8 +1,11 @@
 package br.edu.ifsuldeminas.mch.webii.crudmanager.controller;
 
+import br.edu.ifsuldeminas.mch.webii.crudmanager.model.Cinema;
 import br.edu.ifsuldeminas.mch.webii.crudmanager.model.Movie;
+import br.edu.ifsuldeminas.mch.webii.crudmanager.repository.CinemaRepository;
 import br.edu.ifsuldeminas.mch.webii.crudmanager.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +21,9 @@ public class MovieController {
 
     @Autowired
     private MovieRepository movieRepo;
+
+    @Autowired
+    private CinemaRepository cinemaRepo;
 
     @GetMapping
     public String listMovies(Model model) {
@@ -57,7 +63,17 @@ public class MovieController {
 
     @GetMapping("/delete/{id}")
     public String deleteMovie(@PathVariable("id") Integer id) {
-        movieRepo.deleteById(id);
+        try{
+            movieRepo.deleteById(id);
+        }catch(DataIntegrityViolationException e){
+            List<Cinema> relatedCinemas = cinemaRepo.findByMovieId(id);
+
+            for (Cinema cinema : relatedCinemas) {
+                cinemaRepo.delete(cinema);
+            }
+
+            movieRepo.deleteById(id);
+        }
         return "redirect:/movies";
     }
 }
