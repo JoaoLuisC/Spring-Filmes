@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Crud Manager - Formulário de Filme</title>
-    <<div th:replace="cabecalho :: head"></div>
+    <div th:replace="cabecalho :: head"></div>
 </head>
 <body>
-    <div th:replace="navmenu :: header"></div> 
+    <div th:replace="navmenu :: header"></div>
     <div class="container my-4">
         <h2 th:text="${movie.id == null ? 'Adicionar Filme' : 'Editar Filme'}"></h2>
         <form action="#" th:action="@{/movies/save}" method="POST" th:object="${movie}">

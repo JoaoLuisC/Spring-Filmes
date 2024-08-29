@@ -27,7 +27,7 @@
                     <td th:text="${movie.genre}"></td>
                     <td th:text="${movie.ageRating}"></td>
                     <td>
-                        <a th:href="@{/movies/edit/{id}(id=${movie.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/movies/update/{id}(id=${movie.id})}" class="btn btn-warning btn-sm">Editar</a>
                         <a th:href="@{/movies/delete/{id}(id=${movie.id})}" class="btn btn-danger btn-sm">Excluir</a>
                     </td>
                 </tr>

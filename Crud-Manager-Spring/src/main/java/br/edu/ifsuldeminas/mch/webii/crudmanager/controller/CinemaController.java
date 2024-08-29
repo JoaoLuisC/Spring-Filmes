@@ -9,16 +9,16 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashSet;
+import jakarta.validation.Valid;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cinemas")
@@ -38,33 +38,40 @@ public class CinemaController {
     }
 
     @GetMapping("/form")
-    public String showForm(Model model) {
-        model.addAttribute("cinema", new Cinema());
-        model.addAttribute("allMovies", movieRepo.findAll()); // Para preencher o dropdown com filmes
+    public String showForm(@ModelAttribute("cinema") Cinema cinema, Model model) {
+        List<Movie> allMovies = movieRepo.findAll();  // Para preencher o dropdown com filmes
+        model.addAttribute("allMovies", allMovies);
         return "cinema_form";
     }
 
     @Transactional
-    @PostMapping("/save")
-    public String saveCinema(@ModelAttribute Cinema cinema, @RequestParam(value = "movies", required = false) List<Integer> movieIds) {
-        if (movieIds != null) {
-            Set<Movie> movies = new HashSet<>();
-            for (Integer movieId : movieIds) {
-                Movie movie = movieRepo.findById(movieId)
-                        .orElseThrow(() -> new IllegalArgumentException("Invalid movie Id:" + movieId));
-                movies.add(movie);
-            }
-            cinema.setMovies(movies);
+    @PostMapping("/register")
+    public String registerCinema(@Valid @ModelAttribute("cinema") Cinema cinema, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            List<Movie> allMovies = movieRepo.findAll();
+            model.addAttribute("allMovies", allMovies);
+            return "cinema_form";
         }
+        
         cinemaRepo.save(cinema);
         return "redirect:/cinemas";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editCinema(@PathVariable("id") Integer id, Model model) {
-        Cinema cinema = cinemaRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid cinema Id:" + id));
+    @GetMapping("/update/{id}")
+    public String updateCinema(@PathVariable("id") Integer id, Model model) {
+        Optional<Cinema> cinemaOptional = cinemaRepo.findById(id);
+        Cinema cinema;
+
+        if (cinemaOptional.isPresent()) {
+            cinema = cinemaOptional.get();
+        } else {
+            cinema = new Cinema();
+        }
+
+        List<Movie> allMovies = movieRepo.findAll();
         model.addAttribute("cinema", cinema);
-        model.addAttribute("allMovies", movieRepo.findAll()); // Para preencher o dropdown com filmes
+        model.addAttribute("allMovies", allMovies);
+
         return "cinema_form";
     }
 

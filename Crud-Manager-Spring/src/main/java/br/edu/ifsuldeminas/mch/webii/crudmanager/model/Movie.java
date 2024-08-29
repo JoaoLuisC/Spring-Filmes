@@ -2,19 +2,14 @@ package br.edu.ifsuldeminas.mch.webii.crudmanager.model;
 
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 
 @Entity
-@Data
 @Table(name = "movies")
 public class Movie {
 
@@ -32,7 +27,7 @@ public class Movie {
     private String title;
 
     @NotNull(message = "Duração é obrigatória!")
-    private Integer duration; // Em minutos
+    private Integer duration; 
 
     @NotBlank(message = "Gênero é obrigatório!")
     private String genre;
@@ -40,7 +35,43 @@ public class Movie {
     @NotBlank(message = "Classificação etária é obrigatória!")
     private String ageRating;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cinema_id")
-    private Cinema cinema;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getAgeRating() {
+        return ageRating;
+    }
+
+    public void setAgeRating(String ageRating) {
+        this.ageRating = ageRating;
+    }
 }
